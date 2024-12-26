@@ -4,44 +4,150 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:4144767323931830809",
-      "lastPropertyId": "4:7133989631690579251",
-      "name": "Expense",
+      "id": "2:7189306129822625215",
+      "lastPropertyId": "6:1550554858240069312",
+      "name": "ExpenseCategory",
       "properties": [
         {
-          "id": "1:1549578463172764186",
+          "id": "1:7923231350312022316",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:1062322562271715548",
+          "id": "2:1703088477282025695",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:655948449455127334",
           "name": "description",
           "type": 9
         },
         {
-          "id": "3:5923950746541785119",
+          "id": "4:4933363972199413885",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "5:2159463507159440255",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "6:1550554858240069312",
+          "name": "updatedAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6358264311509833956",
+      "lastPropertyId": "8:1633106587480630557",
+      "name": "Transaction",
+      "properties": [
+        {
+          "id": "1:7597365843607591037",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3077440970014766918",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "3:3147210425607155692",
           "name": "amount",
           "type": 8
         },
         {
-          "id": "4:7133989631690579251",
+          "id": "4:3861750545203204535",
           "name": "date",
           "type": 10
+        },
+        {
+          "id": "5:37049517019746468",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "6:4430306191725740834",
+          "name": "updatedAt",
+          "type": 10
+        },
+        {
+          "id": "7:7949507179958948608",
+          "name": "categoryId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:7286960142482579378",
+          "relationTarget": "ExpenseCategory"
+        },
+        {
+          "id": "8:1633106587480630557",
+          "name": "familyMemberId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:8042598001372457442",
+          "relationTarget": "FamilyMember"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:264080503862476195",
+      "lastPropertyId": "9:6112794871366486316",
+      "name": "FamilyMember",
+      "properties": [
+        {
+          "id": "1:97847250426684944",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:9009093017092783486",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "8:4126137984942786704",
+          "name": "profilePic",
+          "type": 9
+        },
+        {
+          "id": "9:6112794871366486316",
+          "name": "totalSpending",
+          "type": 8
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:4144767323931830809",
-  "lastIndexId": "0:0",
+  "lastEntityId": "4:264080503862476195",
+  "lastIndexId": "2:8042598001372457442",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    4144767323931830809
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    1549578463172764186,
+    1062322562271715548,
+    5923950746541785119,
+    7133989631690579251,
+    4740722099485001972,
+    5923863622796408943,
+    7422090552064943654,
+    1594051696987169089,
+    4228244626084887998
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

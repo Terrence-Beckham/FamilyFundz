@@ -1,8 +1,13 @@
 import 'package:family_fundz/repository/expense_category_repository.dart';
 import 'package:family_fundz/repository/family_member_repository.dart';
 import 'package:family_fundz/repository/transaction_repository.dart';
-import 'package:flutter/material.dart';
+import 'package:family_fundz/screens/analysis_screen.dart';
+import 'package:family_fundz/screens/budget_screen.dart';
+import 'package:family_fundz/screens/family_view.dart';
+import 'package:family_fundz/screens/settings_screen.dart';
+import 'package:family_fundz/screens/transaction_overview.dart';
 import 'package:family_fundz/services/objectbox_service.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 late ObjectBoxService objectbox;
@@ -46,8 +51,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Family Fundz',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
       home: const MyHomePage(title: 'Family Fundz'),
     );
@@ -75,31 +80,49 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _counter,
+            onTap: (index) => setState(() => _counter = index),
+            selectedItemColor: Colors.purple,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.pie_chart),
+                label: 'Transactions',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.people),
+                label: 'Family',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart),
+                label: 'Analysis',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'Budgets',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
+            ],
+          ),
+          body: IndexedStack(
+            index: _counter,
+            children: const [
+              TransactionOverview(),
+              FamilyView(),
+              AnalysisScreen(),
+              BudgetScreen(),
+              SettingsScreen(),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

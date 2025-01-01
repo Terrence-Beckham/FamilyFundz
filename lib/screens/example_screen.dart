@@ -4,8 +4,6 @@ import 'package:family_fundz/repository/family_member_repository.dart';
 import 'package:family_fundz/repository/expense_category_repository.dart';
 import 'package:family_fundz/repository/transaction_repository.dart';
 import 'package:family_fundz/model/family_member.dart';
-import 'package:family_fundz/model/expense_category.dart';
-import 'package:family_fundz/model/transaction.dart';
 
 class ExampleScreen extends StatelessWidget {
   const ExampleScreen({super.key});
@@ -36,7 +34,8 @@ class ExampleScreen extends StatelessWidget {
                       final member = members[index];
                       return ListTile(
                         title: Text(member.name),
-                        subtitle: Text('Total Spending: \$${member.totalSpending}'),
+                        subtitle:
+                            Text('Total Spending: \$${member.totalSpending}'),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () {

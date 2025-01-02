@@ -1,11 +1,30 @@
 import 'package:family_fundz/screens/transactions_overview/credit_card_view.dart';
+import 'package:family_fundz/services/mock_data.dart';
+import 'package:family_fundz/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
+import 'package:family_fundz/models/transaction.dart';
 
 class TransactionOverview extends StatelessWidget {
   const TransactionOverview({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final transactions = MockData.generateInitialTransactions()
+      ..sort((a, b) => b.date.compareTo(a.date)); // Sort by most recent first
+
+    double totalBalance = 0;
+    double totalIncome = 0;
+    double totalExpense = 0;
+
+    for (final transaction in transactions) {
+      if (transaction.transactionType == TransactionType.income) {
+        totalIncome += transaction.amount;
+      } else {
+        totalExpense += transaction.amount;
+      }
+    }
+    totalBalance = totalIncome - totalExpense;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Transactions'),
@@ -18,50 +37,19 @@ class TransactionOverview extends StatelessWidget {
       ),
       body: Column(
         children: [
-          CreditCardView(balance: 4000, incomeTotal: 6000, expenseTotal: 2000),
+          CreditCardView(
+            balance: totalBalance,
+            incomeTotal: totalIncome,
+            expenseTotal: totalExpense,
+          ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
+            child: ListView.separated(
+              padding: const EdgeInsets.all(8),
+              itemCount: transactions.length,
+              separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) {
-                final bool isExpense = index % 2 == 0;
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: isExpense
-                          ? Colors.red.withOpacity(0.1)
-                          : Colors.green.withOpacity(0.1),
-                      child: Icon(
-                        isExpense ? Icons.remove : Icons.add,
-                        color: isExpense ? Colors.red : Colors.green,
-                      ),
-                    ),
-                    title: Text(
-                      isExpense
-                          ? 'Expense ${index + 1}'
-                          : 'Income ${index + 1}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Category: ${isExpense ? "Shopping" : "Salary"}',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    trailing: Text(
-                      isExpense
-                          ? '-\$${50 * (index + 1)}'
-                          : '+\$${100 * (index + 1)}',
-                      style: TextStyle(
-                        color: isExpense ? Colors.red : Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                );
+                final transaction = transactions[index];
+                return TransactionCard(transaction: transaction);
               },
             ),
           ),

@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
             type: BottomNavigationBarType.fixed,
             currentIndex: _counter,
             onTap: (index) => setState(() => _counter = index),
-            selectedItemColor: Colors.purple,
+            selectedItemColor: Colors.blue[700],
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.pie_chart),

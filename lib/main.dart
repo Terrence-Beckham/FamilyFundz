@@ -5,7 +5,7 @@ import 'package:family_fundz/screens/analysis_screen.dart';
 import 'package:family_fundz/screens/budget_screen.dart';
 import 'package:family_fundz/screens/family_view.dart';
 import 'package:family_fundz/screens/settings_screen.dart';
-import 'package:family_fundz/screens/transaction_overview.dart';
+import 'package:family_fundz/screens/transactions_overview/transaction_overview.dart';
 import 'package:family_fundz/services/objectbox_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
